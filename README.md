@@ -1,5 +1,28 @@
 # Proyecto Microservicios
 
+## Proceso de entrenamiento del modelo
+
+1. **Recolección y preparación de datos**  
+Se recopiló un dataset de propiedades que contenía las características relevantes (precio, ubicación, ambientes, superficie, etc.) y una etiqueta que indicaba si dos propiedades eran similares o no. Se realizó una limpieza de los datos, eliminando valores nulos y corrigiendo errores.
+
+2. **Preprocesamiento**  
+Se convirtieron las variables categóricas a numéricas mediante técnicas de encoding y se normalizaron los valores numéricos. Además, se generaron los pares o tripletas de propiedades necesarios para el entrenamiento del modelo de similitud.
+
+3. **División del dataset**  
+El dataset se dividió en un conjunto de entrenamiento y otro de prueba, utilizando un 80% de los datos para entrenar y un 20% para evaluar el modelo.
+
+4. **Definición y entrenamiento del modelo**  
+Se seleccionó un algoritmo de machine learning (por ejemplo, RandomForestClassifier) y se entrenó el modelo con los datos de entrenamiento.
+
+5. **Evaluación del modelo**  
+Se evaluó el desempeño del modelo utilizando el conjunto de prueba, obteniendo métricas como la precisión. En caso de ser necesario, se ajustaron los hiperparámetros y se repitió el proceso de entrenamiento.
+
+6. **Guardado del modelo entrenado**  
+Una vez satisfechos con el desempeño, se guardó el modelo entrenado en un archivo llamado `trained_model.pkl` utilizando la librería pickle de Python.
+
+7. **Integración al microservicio**  
+Finalmente, se copió el archivo `trained_model.pkl` a la carpeta `model_service` del proyecto, permitiendo que el microservicio lo cargue y utilice para predecir la similitud de nuevas propiedades.
+
 ## Descarga del modelo entrenado
 
 El archivo `trained_model.pkl` puede descargarse desde: [Google Drive](https://drive.google.com/drive/folders/1tu9d1D3OZlxETSOzsXqsqJge6QrvP3xu?usp=drive_link)
