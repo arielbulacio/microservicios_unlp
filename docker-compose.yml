@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  auth_service:
+    build: ./auth_service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://admin:secret@postgres/api_db
+
+  model_service:
+    build: ./model_service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - auth_service
+      - redis
+
+  logging_service:
+    build: ./logging_service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - postgres
+
+  cache_service:
+    build: ./cache_service
+    ports:
+      - "5004:5004"
+    depends_on:
+      - redis
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: api_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./auth_service/init_db.sql:/docker-entrypoint-initdb.d/01-init-auth.sql
+      - ./logging_service/init_db.sql:/docker-entrypoint-initdb.d/02-init-logs.sql
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
