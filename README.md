@@ -2,7 +2,7 @@
 
 ## Descripción general
 
-Este proyecto implementa una arquitectura de microservicios para una aplicación modular y escalable. Cada microservicio cumple una función específica y se comunica con los demás a través de HTTP y servicios compartidos como PostgreSQL y Redis.
+Este proyecto implementa una arquitectura de microservicios para una aplicación modular y escalable. El objetivo principal es determinar la similitud de datos de propiedades enviadas por los usuarios, aplicando un modelo de machine learning (ML) entrenado para este fin. Cada microservicio cumple una función específica y se comunica con los demás a través de HTTP y servicios compartidos como PostgreSQL y Redis.
 
 ### Servicios principales
 
@@ -59,4 +59,4 @@ pytest test_api.py
 - **Logs:**
   - `GET /logs` en `logging_service` para consultar eventos registrados.
 
-Consulta la documentación de cada microservicio para más detalles sobre los endpoints disponibles.
+
