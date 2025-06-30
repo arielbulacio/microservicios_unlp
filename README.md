@@ -7,7 +7,7 @@ Este proyecto implementa una arquitectura de microservicios para una aplicación
 ### Servicios principales
 
 - **auth_service**: Gestiona la autenticación y autorización de usuarios. Utiliza PostgreSQL para almacenar usuarios y Redis para gestionar sesiones y tokens.
-- **model_service**: Expone un modelo de similitud basado en Tensorflow. Recibe peticiones autenticadas, procesa datos y responde con resultados del modelo. Utiliza Redis para cachear resultados frecuentes.
+- **model_service**: Expone un modelo de similitud basado en machine learning. Recibe peticiones autenticadas, procesa datos y responde con resultados del modelo. Utiliza Redis para cachear resultados frecuentes. **Requiere el archivo `trained_model.pkl` en la carpeta `model_service`**
 - **logging_service**: Registra eventos y logs de la aplicación en una base de datos PostgreSQL dedicada.
 - **cache_service**: Proporciona una capa de cacheo adicional para acelerar respuestas de otros servicios, usando Redis.
 
@@ -23,7 +23,7 @@ Este proyecto implementa una arquitectura de microservicios para una aplicación
 Cada microservicio cuenta con su propio `requirements.txt` y `Dockerfile` para facilitar la construcción y despliegue.
 
 - **auth_service**: Flask, Redis, PostgreSQL
-- **model_service**: Flask, Redis, Tensorflow. **Requiere el archivo `modelo_similitud.h5` en la carpeta `model_service`**
+- **model_service**: Flask, Redis, modelo ML serializado en `trained_model.pkl`
 - **logging_service**: Flask, PostgreSQL
 - **cache_service**: Flask, Redis
 
@@ -36,7 +36,7 @@ No es necesario ejecutar comandos manuales para inicializar la base de datos.
 ## Cómo levantar el proyecto:
 
 1. Clonar el repositorio
-2. Asegúrate de colocar el archivo `modelo_similitud.h5` en la carpeta `model_service`.
+2. Asegúrate de colocar el archivo `trained_model.pkl` en la carpeta `model_service`.
 3. Ejecutar:
 
 ```bash
@@ -55,7 +55,7 @@ pytest test_api.py
 - **Autenticación:**
   - `POST /login` en `auth_service` con usuario y contraseña para obtener un token.
 - **Predicción:**
-  - `POST /predict` en `model_service` enviando datos y el token en el header.
+  - `POST /service` en `model_service` enviando datos y el token en el header.
 - **Logs:**
   - `GET /logs` en `logging_service` para consultar eventos registrados.
 
