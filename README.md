@@ -1,5 +1,23 @@
 # Proyecto Microservicios
 
+## Descripción general
+
+Este proyecto implementa una arquitectura de microservicios para una aplicación modular y escalable. Cada microservicio cumple una función específica y se comunica con los demás a través de HTTP y servicios compartidos como PostgreSQL y Redis.
+
+### Servicios principales
+
+- **auth_service**: Gestiona la autenticación y autorización de usuarios. Utiliza PostgreSQL para almacenar usuarios y Redis para gestionar sesiones y tokens.
+- **model_service**: Expone un modelo de similitud basado en Tensorflow. Recibe peticiones autenticadas, procesa datos y responde con resultados del modelo. Utiliza Redis para cachear resultados frecuentes.
+- **logging_service**: Registra eventos y logs de la aplicación en una base de datos PostgreSQL dedicada.
+- **cache_service**: Proporciona una capa de cacheo adicional para acelerar respuestas de otros servicios, usando Redis.
+
+### Flujo de funcionamiento
+
+1. Un usuario se autentica a través de `auth_service`.
+2. El token de autenticación se almacena en Redis.
+3. El usuario realiza una petición a `model_service`, que valida el token con `auth_service` y procesa la solicitud.
+4. Los resultados pueden ser cacheados por `cache_service` y los eventos importantes se registran en `logging_service`.
+
 ## Estructura de servicios
 
 Cada microservicio cuenta con su propio `requirements.txt` y `Dockerfile` para facilitar la construcción y despliegue.
@@ -31,3 +49,14 @@ docker-compose up --build
 cd tests
 pytest test_api.py
 ```
+
+## Ejemplo de uso de la API
+
+- **Autenticación:**
+  - `POST /login` en `auth_service` con usuario y contraseña para obtener un token.
+- **Predicción:**
+  - `POST /predict` en `model_service` enviando datos y el token en el header.
+- **Logs:**
+  - `GET /logs` en `logging_service` para consultar eventos registrados.
+
+Consulta la documentación de cada microservicio para más detalles sobre los endpoints disponibles.
