@@ -1,5 +1,9 @@
 # Proyecto Microservicios
 
+## Descarga del modelo entrenado
+
+El archivo `trained_model.pkl` puede descargarse desde: [Google Drive](https://drive.google.com/drive/folders/1tu9d1D3OZlxETSOzsXqsqJge6QrvP3xu?usp=drive_link)
+
 ## Descripción general
 
 Este proyecto implementa una arquitectura de microservicios para una aplicación modular y escalable. El objetivo principal es determinar la similitud de datos de propiedades enviadas por los usuarios, aplicando un modelo de machine learning (ML) entrenado para este fin. Cada microservicio cumple una función específica y se comunica con los demás a través de HTTP y servicios compartidos como PostgreSQL y Redis.
